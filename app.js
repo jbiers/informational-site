@@ -1,14 +1,17 @@
 #!/usr/bin/env node
 
 import * as http from 'http';
+import * as dotenv from 'dotenv';
 
-const hostname = "127.0.0.1";
-const port = 3000;
+dotenv.config();
+
+const hostname = process.env.HOSTNAME;
+const port = process.env.PORT;
 
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
-    res.end(`${new Date()}\n`);
+    res.end(`Hello`);
 });
 
 server.listen(port, hostname, () => {
