@@ -34,7 +34,8 @@ const crud = {
         writeToFile();
     },
     create({ content }) {
-        const id = crud.posts.length > 0 ? crud.posts[crud.posts.length - 1].id + 1 : 1;
+        const numPosts = crud.posts.length;
+        const id = numPosts > 0 ? crud.posts[numPosts - 1].id + 1 : 1;
         const post = { id, content };
 
         crud.posts.push(post);
