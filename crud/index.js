@@ -5,10 +5,6 @@ import path from 'path';
 
 dotenv.config();
 
-// Delete (id not found, file not found)
-// Read (empty or nonexisting file)
-// Update (id not found, file not found)
-
 const __filename = process.env.DATAFILE;
 const __dirname = path.dirname(__filename);
 const filepath = path.resolve(__dirname, __filename);
