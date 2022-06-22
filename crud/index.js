@@ -5,31 +5,43 @@ import path from 'path';
 
 dotenv.config();
 
+// Delete (id not found, file not found)
+// Read (empty or nonexisting file)
+// Update (id not found, file not found)
+
 const __filename = process.env.DATAFILE;
 const __dirname = path.dirname(__filename);
-const filepath = path.resolve(__dirname, __filename)
+const filepath = path.resolve(__dirname, __filename);
 
 console.log('[CRUD] Node - File System');
+
+function writeToFile() {
+    return fs.writeFileSync(filepath, JSON.stringify(crud.posts), { encoding: 'utf-8' });
+}
+
+function readFromFile() {
+    return JSON.parse(fs.readFileSync(filepath, { encoding: 'utf-8' }));
+}
 
 const crud = {
     posts: [],
     setup() {
         if (fs.existsSync(filepath)) {
-            crud.posts = JSON.parse(fs.readFileSync(filepath, { encoding: 'utf-8' }));
+            crud.posts = readFromFile();
             return;
         }
 
-        fs.writeFileSync(filepath, JSON.stringify(crud.posts), { encoding: 'utf-8' });
+        writeToFile();
     },
     create({ content }) {
-        const id = crud.posts.length + 1;
+        const id = crud.posts.length > 0 ? crud.posts[crud.posts.length - 1].id + 1 : 1;
         const post = { id, content };
 
         crud.posts.push(post);
-        fs.writeFileSync(filepath, JSON.stringify(crud.posts), { encoding: 'utf-8' });
+        writeToFile();
     },
     read() {
-        crud.posts = JSON.parse(fs.readFileSync(filepath, { encoding: 'utf-8' }));
+        crud.posts = readFromFile();
 
         return crud.posts;
     },
@@ -37,30 +49,24 @@ const crud = {
         const postIndex = crud.posts.findIndex(post => post.id === id);
         crud.posts[postIndex].content = content;
 
-        fs.writeFileSync(filepath, JSON.stringify(crud.posts), { encoding: 'utf-8' });
+        writeToFile();
     },
     delete(id) {
         crud.posts = crud.posts.filter(post => post.id !== id);
         
-        fs.writeFileSync(filepath, JSON.stringify(crud.posts), { encoding: 'utf-8' });
+        writeToFile();
     }
 };
 
 crud.setup();
 
-// Create
 crud.create({ content: 'Hello, World!' });
 crud.create({ content: 'Hello, People!' });
 
-// Read
 console.log(crud.read());
 
-// Update
 crud.update({ id: 1, content: 'Hello, Test!' });
-// Delete
-crud.delete(1);
+
 crud.delete(2);
-crud.delete(3);
-crud.delete(4);
 
 console.log(crud.read());
