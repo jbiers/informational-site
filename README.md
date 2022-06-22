@@ -1,2 +1,2 @@
 # informational-site
-Basic informational website built with NodeJS
+Explorations in NodeJS for The Odin Project course
