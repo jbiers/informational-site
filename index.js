@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import http from 'http';
+import {readdir} from 'fs';
 import fs from 'fs/promises';
 
 import path from 'path';
@@ -61,7 +62,8 @@ const loadFiles = function() {
 const requestListener = function(req, res) {
     res.setHeader("Content-Type", "text/html");
     switch (req.url) {
-        case '/' || '/index.html':
+        case '/':
+        case '/index.html':
             res.writeHead(200);
             res.end(indexFile);
             break
