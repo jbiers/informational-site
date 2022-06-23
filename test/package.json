@@ -13,7 +13,11 @@
     "url": "git+https://github.com/jbiers/informational-site.git"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Julia",
+    "email": "juliabiersuriano@gmail.com",
+    "url": "https://github.com/jbiers"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jbiers/informational-site/issues"
