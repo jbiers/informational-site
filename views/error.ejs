@@ -1,3 +1,26 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <h1>Informational Site</h1>
+    </header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/contact">Contact</a>
+      <a href="/about">About</a>
+    </nav>
+    <main>
+      <h2><%= message %></h2>
+      <h2><%= error.status %></h2>
+      <pre><%= error.stack %></pre>
+    </main>
+    <footer>
+      <p>made by Julia Bier with ❤️</p>
+    </footer>
+  </body>
+</html>
+
